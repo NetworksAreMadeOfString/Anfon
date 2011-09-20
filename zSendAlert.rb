@@ -48,7 +48,6 @@ if pagerduty_key
   require 'net/https'
   require 'json'
 end
-
 if mysql_enabled
   require 'mysql'
 end
@@ -79,7 +78,7 @@ end
 
 #This is just to make sure we don't waste 90,000,000 SMS credits due to something crazy happening
 if sentSMS > maxSMS
-  #puts "Too many SMS's sent (#{sentSMS} / #{maxSMS})"
+  puts "Too many SMS's sent (#{sentSMS} / #{maxSMS})"
   st.close
 else
   if mysql_enabled
@@ -100,18 +99,18 @@ else
     st.close
   end
   
+  #If PagerDuty is enabled and the recipient number is our specified one (this is specific to our use case)
+  #then call the API via HTTP POST
   if pagerduty_key && recipient == '0000'
     http = Net::HTTP.new('events.pagerduty.com', 443)
     http.use_ssl = true
     path = '/generic/2010-04-15/create_event.json'
     data = "{\"service_key\": \"#{pagerduty_key}\", \"event_type\": \"trigger\",\"description\": \"#{message}\"}"
     headers = { 'Content-Type' => 'application/x-www-form-urlencoded' }
-    
     resp, data = http.post(path, data, headers)
-    
-    puts 'Code = ' + resp.code
-    puts 'Message = ' + resp.message
-    resp.each {|key, val| puts key + ' = ' + val}
-    puts data
+    #puts 'Code = ' + resp.code
+    #puts 'Message = ' + resp.message
+    #resp.each {|key, val| puts key + ' = ' + val}
+    #puts data
   end
 end
