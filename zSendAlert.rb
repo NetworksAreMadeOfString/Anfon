@@ -87,8 +87,8 @@ else
   
   safemessage = URI.escape(message, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
   if recipient != '0000'
-    #open("http://api.clickatell.com/http/sendmsg?user=#{clickatell_user}&password=#{clickatell_password}&api_id=3063775&to=#{recipient}&text=#{safemessage}&from=#{clickatell_from}&concat=2")
-    puts "http://api.clickatell.com/http/sendmsg?user=#{clickatell_user}&password=#{clickatell_password}&api_id=3063775&to=#{recipient}&text=#{safemessage}&from=#{clickatell_from}&concat=2"
+    open("http://api.clickatell.com/http/sendmsg?user=#{clickatell_user}&password=#{clickatell_password}&api_id=#{clickatell_id}&to=#{recipient}&text=#{safemessage}&from=#{clickatell_from}&concat=2")
+    puts "http://api.clickatell.com/http/sendmsg?user=#{clickatell_user}&password=#{clickatell_password}&api_id=#{clickatell_id}&to=#{recipient}&text=#{safemessage}&from=#{clickatell_from}&concat=2"
   end
   
   #If mysql is enabled add an entry
