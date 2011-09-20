@@ -62,7 +62,7 @@ ARGV.each do|a|
 end
 
 #Grab the text from stdin (the actual message from Zenoss)
-$stdin.each_line do |line|
+STDIN.each_line do |line|
   message << line
 end
 
@@ -85,10 +85,10 @@ else
     message << " #{sentSMS}/#{maxSMS}"
   end
   
-  message = URI.escape(message, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
+  safemessage = URI.escape(message, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
   if recipient != '0000'
-    #open("http://api.clickatell.com/http/sendmsg?user=#{clickatell_user}&password=#{clickatell_password}&api_id=3063775&to=#{recipient}&text=#{message}&from=#{clickatell_from}&concat=2")
-    puts "http://api.clickatell.com/http/sendmsg?user=#{clickatell_user}&password=#{clickatell_password}&api_id=3063775&to=#{recipient}&text=#{message}&from=#{clickatell_from}&concat=2"
+    #open("http://api.clickatell.com/http/sendmsg?user=#{clickatell_user}&password=#{clickatell_password}&api_id=3063775&to=#{recipient}&text=#{safemessage}&from=#{clickatell_from}&concat=2")
+    puts "http://api.clickatell.com/http/sendmsg?user=#{clickatell_user}&password=#{clickatell_password}&api_id=3063775&to=#{recipient}&text=#{safemessage}&from=#{clickatell_from}&concat=2"
   end
   
   #If mysql is enabled add an entry
