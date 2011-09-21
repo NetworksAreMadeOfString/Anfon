@@ -3,6 +3,9 @@
 # Copyright (C) 2011 - Gareth Llewellyn
 # 
 # This file is part of Anfon - https://github.com/NetworksAreMadeOfString/anfon
+#
+# A drop in replacement for the Zenoss Pager script written in ruby allowing 
+# interfacing to Clickatell, PagerDuty and others 
 # 
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by
