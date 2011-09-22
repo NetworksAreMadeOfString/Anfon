@@ -90,8 +90,6 @@ else
   
   safemessage = URI.escape(message, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
   if recipient != '0000'
-    #open("http://api.clickatell.com/http/sendmsg?user=#{clickatell_user}&password=#{clickatell_password}&api_id=#{clickatell_id}&to=#{recipient}&text=#{safemessage}&from=#{clickatell_from}&concat=2")
-    #puts "http://api.clickatell.com/http/sendmsg?user=#{clickatell_user}&password=#{clickatell_password}&api_id=#{clickatell_id}&to=#{recipient}&text=#{safemessage}&from=#{clickatell_from}&concat=2"
     http = Net::HTTP.new('api.clickatell.com', 80)
     http.use_ssl = false
     path = "/http/sendmsg?user=#{clickatell_user}&password=#{clickatell_password}&api_id=#{clickatell_id}&to=#{recipient}&text=#{safemessage}&from=#{clickatell_from}&concat=2"
